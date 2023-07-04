@@ -14,7 +14,8 @@ export class AppComponent {
 	nuevaTarea = {
 		id: 0,
 		titulo: '',
-		minutos: 0
+		minutos: 0,
+		seleccionada: false
 	}
 
 	constructor(
@@ -34,7 +35,8 @@ export class AppComponent {
 		var tarea = {
 			id: this.nuevaTarea.id,
 			titulo: this.nuevaTarea.titulo,
-			minutos: this.nuevaTarea.minutos
+			minutos: this.nuevaTarea.minutos,
+			seleccionada: false
 		};
 		this.tareas.push(tarea);
 

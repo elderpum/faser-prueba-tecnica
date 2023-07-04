@@ -9,6 +9,7 @@
 				<th>ID de Tarea</th>
 				<th>Título de Tarea</th>
 				<th>Minutos</th>
+				<th>Seleccionar Tarea</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,6 +17,7 @@
 				<td>{{tarea.id}}</td>
 				<td>{{tarea.titulo}}</td>
 				<td>{{tarea.minutos}}</td>
+				<td><input type="checkbox" [(ngModel)]="tarea.seleccionada"></td> <!-- Checkbox para la selección -->
 			</tr>
 		</tbody>
 	</table>
