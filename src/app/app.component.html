@@ -6,15 +6,35 @@
 	<table>
 		<thead>
 			<tr>
+				<th>ID de Tarea</th>
 				<th>Título de Tarea</th>
 				<th>Minutos</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let tarea of tareas">
+				<td>{{tarea.id}}</td>
 				<td>{{tarea.titulo}}</td>
 				<td>{{tarea.minutos}}</td>
 			</tr>
 		</tbody>
 	</table>
+	<hr>
+	<!-- Formulario para agregar tareas -->
+	<h2>Agregar Nueva Tarea</h2>
+	<form (submit)="agregarTarea()">
+		<div>
+			<label>ID de Tarea</label>
+			<input type="number" name="id" [(ngModel)]="nuevaTarea.id" required>
+		</div>
+		<div>
+			<label>Título de Tarea</label>
+			<input type="text" name="titulo" [(ngModel)]="nuevaTarea.titulo" required>
+		</div>
+		<div>
+			<label>Minutos</label>
+			<input type="number" name="minutos" [(ngModel)]="nuevaTarea.minutos" required>
+		</div>
+		<button clas="button" type="submit">Agregar</button>
+	</form>
 </div>

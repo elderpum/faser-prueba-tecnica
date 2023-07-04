@@ -9,6 +9,13 @@ import { Tarea } from './tarea';
 })
 export class AppComponent {
 	tareas: Tarea[];
+	
+	// Objeto Tarea
+	nuevaTarea = {
+		id: 0,
+		titulo: '',
+		minutos: 0
+	}
 
 	constructor(
         public service: AppService,
@@ -20,5 +27,20 @@ export class AppComponent {
 
 	async obtenerTareas() {
 		this.tareas = await this.service.obtenerTareas();
+	}
+
+	agregarTarea() {
+		// Creamos un objeto nuevo de tareas y lo agregamos al arreglo
+		var tarea = {
+			id: this.nuevaTarea.id,
+			titulo: this.nuevaTarea.titulo,
+			minutos: this.nuevaTarea.minutos
+		};
+		this.tareas.push(tarea);
+
+		// Limpiamos el formulario
+		this.nuevaTarea.id = 0;
+		this.nuevaTarea.titulo = '';
+		this.nuevaTarea.minutos = 0;
 	}
 }
