@@ -39,7 +39,8 @@ export class AppComponent {
 			id: this.nuevaTarea.id,
 			titulo: this.nuevaTarea.titulo,
 			minutos: this.nuevaTarea.minutos,
-			seleccionada: false
+			seleccionada: false,
+			destacada: false
 		};
 		this.tareas.push(tarea);
 
@@ -57,19 +58,20 @@ export class AppComponent {
 	// El ordenamiento se logra porque acepta únicamente objetos de tipo Tarea
 	ordenarPor(campo: keyof Tarea) {
 		this.tareas.sort((a, b) => {
-		  let comparacion = 0;
+			let comparacion = 0;
 	  
-		  if (a[campo] > b[campo]) {
-			comparacion = 1;
-		  } else if (a[campo] < b[campo]) {
-			comparacion = -1;
-		  }
+			if (a[campo] > b[campo]) {
+				comparacion = 1;
+		  	} 
+			else if (a[campo] < b[campo]) {
+				comparacion = -1;
+		  	}
 	  
-		  if (!this.ordenAscendente) {
-			comparacion *= -1;
-		  }
+		  	if (!this.ordenAscendente) {
+				comparacion *= -1;
+		  	}
 	  
-		  return comparacion;
+		  	return comparacion;
 		});
 	  
 		// Obtener el índice de la tarea seleccionada (si hay alguna)
@@ -78,11 +80,36 @@ export class AppComponent {
 	  
 		// Si hay una tarea seleccionada, moverla a la nueva posición
 		if (indiceSeleccionado !== -1) {
-		  const tarea = this.tareas.splice(indiceSeleccionado, 1)[0];
-		  this.tareas.splice(0, 0, tarea);
+		  	var tarea = this.tareas.splice(indiceSeleccionado, 1)[0];
+		  	this.tareas.splice(0, 0, tarea);
 		}
 	  
 		// Invertir el estado de ordenAscendente
 		this.ordenAscendente = !this.ordenAscendente;
-	  }
+	}
+
+	// Verifica si al menos existe una tarea seleccionada
+	hayTareasSeleccionadas(): boolean {
+		if (this.tareas && this.tareas.length > 0) {
+			return this.tareas.some(tarea => tarea.seleccionada);
+		}
+		return false;
+	}
+	  
+	// Destaca las tareas seleccionadas y si están destacadas, poder volverlas a su estado normal
+	destacarTareasSeleccionadas() {
+		const tareasSeleccionadas = this.tareas.filter(tarea => tarea.seleccionada);
+	  
+		if (tareasSeleccionadas.length > 0) {
+			const algunaDestacada = tareasSeleccionadas.some(tarea => tarea.destacada);
+	  
+			tareasSeleccionadas.forEach(tarea => {
+			if (algunaDestacada && tarea.destacada) {
+				tarea.destacada = false;
+			} else {
+				tarea.destacada = true;
+			}
+			});
+		}
+	}
 }

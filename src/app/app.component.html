@@ -15,7 +15,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let tarea of tareas">
+			<tr *ngFor="let tarea of tareas" [ngClass]="{'destacada': tarea.destacada}">
 				<td>{{tarea.id}}</td>
 				<td>{{tarea.titulo}}</td>
 				<td>{{tarea.minutos}}</td>
@@ -46,5 +46,11 @@
 	<h2>Eliminar Tareas</h2>
 	<form (submit)="eliminarTareasSeleccionadas()">
 		<button class="button" type="submit">Eliminar</button>
+	</form>
+	<hr>
+	<!-- Formulario para destacar tareas seleccionadas -->
+	<h2>Destacar Tareas Seleccionadas</h2>
+	<form (submit)="destacarTareasSeleccionadas()">
+		<button class="button" type="submit" [disabled]="!hayTareasSeleccionadas()">Destacar Tareas Seleccionadas</button>
 	</form>
 </div>
