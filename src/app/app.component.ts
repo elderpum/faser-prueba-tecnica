@@ -45,4 +45,9 @@ export class AppComponent {
 		this.nuevaTarea.titulo = '';
 		this.nuevaTarea.minutos = 0;
 	}
+
+	eliminarTareasSeleccionadas() {
+		// Con el filtro que creamos anteriormente de 'seleccionada', buscamos las tareas seleccionadas y las eliminamos
+		this.tareas = this.tareas.filter((tarea) => !tarea.seleccionada);
+	  }
 }
