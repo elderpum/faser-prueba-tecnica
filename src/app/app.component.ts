@@ -112,4 +112,19 @@ export class AppComponent {
 			});
 		}
 	}
+
+	ordenarTareasAleatoriamente() {
+		
+		// Copiar el array original de tareas
+		const tareasCopiadas = [...this.tareas];
+	  
+		// Ordenar aleatoriamente las tareas
+		for (let i = tareasCopiadas.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[tareasCopiadas[i], tareasCopiadas[j]] = [tareasCopiadas[j], tareasCopiadas[i]];
+		}
+	  
+		// Asignar el nuevo orden a las tareas
+		this.tareas = tareasCopiadas;
+	}
 }

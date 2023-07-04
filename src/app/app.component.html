@@ -53,4 +53,10 @@
 	<form (submit)="destacarTareasSeleccionadas()">
 		<button class="button" type="submit" [disabled]="!hayTareasSeleccionadas()">Destacar Tareas Seleccionadas</button>
 	</form>
+	<hr>
+	<!-- Formulario para ordenar aleatoriamente las tareas -->
+	<h2>Ordenar Aleatoriamente</h2>
+	<form (submit)="ordenarTareasAleatoriamente()">
+		<button class="button" type="submit">Ordenar Aleatoriamente</button>
+	</form>
 </div>
