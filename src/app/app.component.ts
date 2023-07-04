@@ -18,6 +18,9 @@ export class AppComponent {
 		seleccionada: false
 	}
 
+	// Bandera para el ordenamiento ascendente o descendente
+	ordenAscendente: boolean = true;
+
 	constructor(
         public service: AppService,
 	) { }
@@ -49,5 +52,37 @@ export class AppComponent {
 	eliminarTareasSeleccionadas() {
 		// Con el filtro que creamos anteriormente de 'seleccionada', buscamos las tareas seleccionadas y las eliminamos
 		this.tareas = this.tareas.filter((tarea) => !tarea.seleccionada);
+	}
+
+	// El ordenamiento se logra porque acepta únicamente objetos de tipo Tarea
+	ordenarPor(campo: keyof Tarea) {
+		this.tareas.sort((a, b) => {
+		  let comparacion = 0;
+	  
+		  if (a[campo] > b[campo]) {
+			comparacion = 1;
+		  } else if (a[campo] < b[campo]) {
+			comparacion = -1;
+		  }
+	  
+		  if (!this.ordenAscendente) {
+			comparacion *= -1;
+		  }
+	  
+		  return comparacion;
+		});
+	  
+		// Obtener el índice de la tarea seleccionada (si hay alguna)
+		var tareaSeleccionada = this.tareas.find(tarea => tarea.seleccionada);
+		var indiceSeleccionado = tareaSeleccionada ? this.tareas.indexOf(tareaSeleccionada) : -1;
+	  
+		// Si hay una tarea seleccionada, moverla a la nueva posición
+		if (indiceSeleccionado !== -1) {
+		  const tarea = this.tareas.splice(indiceSeleccionado, 1)[0];
+		  this.tareas.splice(0, 0, tarea);
+		}
+	  
+		// Invertir el estado de ordenAscendente
+		this.ordenAscendente = !this.ordenAscendente;
 	  }
 }
